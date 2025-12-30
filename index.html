@@ -1,62 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Sanjiv Shrestha | Portfolio</title>
+
+    <!-- SEO Meta -->
+    <title>Sanjiv Shrestha | Aspiring Data Analyst</title>
+    <meta name="description"
+        content="Portfolio of Sanjiv Shrestha, an aspiring data analyst with a background in data analytics, software engineering, and web development.">
+    <meta name="keywords" content="Sanjiv Shrestha, Data Analyst, Data Science, Portfolio, Python, Tableau, SQL">
+    <meta name="author" content="Sanjiv Shrestha">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- OpenGraph -->
+    <meta property="og:title" content="Sanjiv Shrestha | Aspiring Data Analyst">
+    <meta property="og:description"
+        content="Exploring data to uncover insights and empower better decision-making. View projects, skills, and experience.">
+    <meta property="og:type" content="website">
+    <!-- Optional later:
+    <meta property="og:image" content="https://yourdomain.com/og-image.png">
+    -->
+    <meta property="og:url" content="https://yourdomain.com">
+
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1f2933, #111827);
-            color: #e5e7eb;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+        :root {
+            --bg-gradient: linear-gradient(135deg, #fdfbfb, #ebedee, #dbeafe);
+            --card-bg: rgba(255, 255, 255, 0.82);
+            --text-primary: #1f2937;
+            --text-secondary: #374151;
+            --accent: #2563eb;
+            --blob1: #93c5fd;
+            --blob2: #c4b5fd;
         }
 
-        .container {
-            max-width: 700px;
-            text-align: center;
-            padding: 40px;
-            background-color: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        body.dark {
+            --bg-gradient: linear-gradient(135deg, #020617, #0f172a, #1e293b);
+            --card-bg: rgba(15, 23, 42, 0.9);
+            --text-primary: #e5e7eb;
+            --text-secondary: #cbd5f5;
+            --accent: #60a5fa;
+            --blob1: #1d4ed8;
+            --blob2: #7c3aed;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-primary);
+            transition: background 0.4s ease;
+            overflow-x: hidden;
+        }
+
+        /* ===== Animated Blobs ===== */
+        .blob {
+            position: fixed;
+            width: 340px;
+            height: 340px;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.55;
+            animation: float 22s infinite alternate ease-in-out;
+            z-index: -1;
+        }
+
+        .blob.one {
+            background: var(--blob1);
+            top: -120px;
+            left: -120px;
+        }
+
+        .blob.two {
+            background: var(--blob2);
+            bottom: -140px;
+            right: -140px;
+            animation-delay: 6s;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            50% {
+                transform: translate(40px, -30px) scale(1.08);
+            }
+
+            100% {
+                transform: translate(-30px, 40px) scale(0.95);
+            }
+        }
+
+        /* ===== Layout ===== */
+        header,
+        section {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 18px;
+            padding: 36px;
+            box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+            backdrop-filter: blur(12px);
+            border-left: 5px solid var(--accent);
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
+            color: var(--accent);
             margin-bottom: 10px;
-            color: #38bdf8;
         }
 
-        .coming-soon {
-            font-size: 1.2rem;
-            font-weight: 500;
-            letter-spacing: 1px;
-            margin-bottom: 25px;
-            color: #fbbf24;
+        h2 {
+            font-size: 1.9rem;
+            margin-bottom: 18px;
+            color: var(--accent);
         }
 
         p {
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #d1d5db;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            text-align: justify;
+        }
+
+        .tagline {
+            font-size: 1.15rem;
+            font-weight: 500;
+            margin-bottom: 18px;
+        }
+
+        /* ===== Skills ===== */
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill {
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: rgba(0, 0, 0, 0.06);
+            font-size: 0.9rem;
+        }
+
+        body.dark .skill {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* ===== Placeholder ===== */
+        .placeholder {
+            opacity: 0.75;
+            font-style: italic;
+            text-align: center;
+            padding: 26px;
+            border: 2px dashed rgba(0, 0, 0, 0.18);
+            border-radius: 14px;
+        }
+
+        body.dark .placeholder {
+            border-color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* ===== Contact ===== */
+        .contact a {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== Toggle ===== */
+        .toggle {
+            position: fixed;
+            top: 18px;
+            right: 18px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+
+        /* Respect reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            .card {
+                opacity: 1;
+                transform: none;
+            }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1>Sanjiv Shrestha</h1>
-        <div class="coming-soon">Portfolio Coming Soon</div>
-        <p>
-            I am deeply interested in data science and enjoy working with data to uncover
-            meaningful insights and patterns. I am passionate about learning how data can
-            be transformed into valuable knowledge that supports better decision-making
-            and innovation. This portfolio will soon showcase my journey, skills, and
-            projects in the field of data science.
-        </p>
-    </div>
+
+    <!-- Background Blobs -->
+    <div class="blob one"></div>
+    <div class="blob two"></div>
+
+    <!-- Theme Toggle -->
+    <button class="toggle" onclick="toggleTheme()">🌗 Toggle</button>
+
+    <header>
+        <div class="card">
+            <h1>Sanjiv Shrestha</h1>
+            <div class="tagline">Aspiring Data Analyst · Empowering Decisions with Data</div>
+            <p>
+                I have a strong interest in data science and enjoy exploring data to discover
+                patterns, trends, and meaningful insights. I am passionate about using data
+                to solve problems and support informed decision-making.
+            </p>
+        </div>
+    </header>
+
+    <section>
+        <div class="card">
+            <h2>About Me</h2>
+            <p>
+                My journey in technology began with web development, where I developed a keen
+                interest in how user interactions generate vast datasets. This curiosity led
+                me to pursue a MSc in IT (Data Analytics) to transform raw data into strategic
+                business value.
+            </p>
+            <p>
+                I am passionate about the intersection of software engineering and data
+                science, particularly in building efficient data pipelines and
+                production-ready analytical solutions.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="card">
+            <h2>Skills</h2>
+            <h3>Programming</h3>
+            <div class="skills">
+                <span class="skill">Python</span>
+                <span class="skill">R</span>
+                <span class="skill">JavaScript</span>
+                <span class="skill">Machine Learning</span>
+            </div>
+
+            <h3>Data & Tools</h3>
+            <div class="skills">
+                <span class="skill">Tableau</span>
+                <span class="skill">Git</span>
+                <span class="skill">Excel</span>
+            </div>
+
+            <h3>Databases</h3>
+            <div class="skills">
+                <span class="skill">SQL</span>
+                <span class="skill">PostgreSQL</span>
+                <span class="skill">MongoDB</span>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="card">
+            <h2>Projects</h2>
+            <div class="placeholder">
+                Projects coming soon. This section will feature case studies with insights
+                and GitHub links.
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="card">
+            <h2>Education</h2>
+            <p>
+                <strong>MSc Information Technology with Data Analytics</strong><br>
+                University of the West of Scotland – London Campus<br>
+                2025 / 2026
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="card">
+            <h2>Experience</h2>
+            <p>
+                <strong>Web Developer</strong> — Business Management Services<br>
+                Web-based systems development with close client interaction, translating
+                business requirements into functional digital solutions.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="card contact">
+            <h2>Contact</h2>
+            <a href="mailto:mr.sanjivst@gmail.com">mr.sanjivst@gmail.com</a>
+            <a href="https://github.com/sanjivst" target="_blank">GitHub</a>
+            <a href="https://www.linkedin.com/in/sanjivst/" target="_blank">LinkedIn</a>
+            <p>England, United Kingdom</p>
+        </div>
+    </section>
+
+    <script>
+        /* Theme */
+        const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+        const savedTheme = localStorage.getItem("theme");
+        if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+            document.body.classList.add("dark");
+        }
+        function toggleTheme() {
+            document.body.classList.toggle("dark");
+            localStorage.setItem(
+                "theme",
+                document.body.classList.contains("dark") ? "dark" : "light"
+            );
+        }
+
+        /* Scroll Animations */
+        const cards = document.querySelectorAll(".card");
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        cards.forEach(card => observer.observe(card));
+    </script>
 </body>
+
 </html>
